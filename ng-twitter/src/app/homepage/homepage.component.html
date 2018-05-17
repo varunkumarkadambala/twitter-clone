@@ -1,0 +1,39 @@
+<nav class="navbar bg-light navbar-light">
+  <ul class="navbar-nav" style="margin-left: 5%">
+    <li class="nav-item active" >
+      <a class="nav-link" href="/home"><i class="fa fa-twitter"></i> Ng-Twitter</a>
+    </li>
+  </ul>
+  <div style="margin-right:3%">
+    <button class="btn btn-light">
+      <i class="fa fa-sign-out"></i>Logout
+    </button>
+  </div>
+</nav>
+<div id='main' style="margin: 5%; margin-top: 1%">
+  <form (ngSubmit)="OnSubmit(f)" class="form-container" #f="ngForm" style="margin: 2%">
+    <div class="form-group">
+      <h4>What do you feel?</h4>
+      <input required type="text" name="userName" placeholder="Your Name" [ngModel] = "tweet.created_by" class="form-control" id="userName">
+      <textarea required name="message" [ngModel] = "tweet.message"  placeholder="Type your message" class="form-control" id="message" style="margin-top: 1%;margin-bottom: 1%"></textarea>
+      <button type="submit" class="btn btn-primary" style="float: right">Post</button>
+    </div>
+  </form>
+  <div style="margin: 5%; margin-top: 2%">
+    <h4>Chirp Feed</h4>
+    <div *ngFor="let tweet of tweets | orderBy: 'tweet?.created_at' : true : true ">
+      <div class="card">
+        <div class="card-body">
+          <p>
+            {{tweet?.message}}
+          </p>
+        </div>
+        <div class="card-footer">
+          <small>Posted by @{{tweet?.created_by}}</small>
+          <small style="float: right">{{tweet?.created_at}}</small>
+        </div>
+      </div>
+      <br/>
+    </div>
+  </div>
+</div>
